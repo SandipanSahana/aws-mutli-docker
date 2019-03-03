@@ -5,7 +5,7 @@ before_install:
     - docker build -t sandipansahana/react-test -f ./client/Dockerfile.dev ./client
     
 scripts:
-    - docker run sandipansahana/react-test npm test -- --coverage
+    - docker run sandipansahana/react-test npm run test -- --coverage
     
 after_success:
     - docker build -t sandipansahana/mutli-client ./client
