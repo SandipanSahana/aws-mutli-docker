@@ -1,0 +1,19 @@
+sudo: required
+services:
+    - docker
+before_install:
+    - docker build -t sandipansahana/react-test -f ./client/Dockerfile.dev ./client
+    
+scripts:
+    - docker run sandipansahana/react-test npm test -- --coverage
+    
+after_success:
+    - docker build -t sandipansahana/mutli-client ./client
+    - docker build -t sandipansahana/mutli-nginx ./nginx
+    - docker build -t sandipansahana/mutli-server ./server
+    - docker build -t sandipansahana/mutli-worker ./worker
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    - docker push sandipansahana/mutli-client 
+    - docker push sandipansahana/mutli-nginx
+    - docker push sandipansahana/mutli-server 
+    - docker push sandipansahana/mutli-worker 
