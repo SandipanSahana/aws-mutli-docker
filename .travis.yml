@@ -8,12 +8,12 @@ script:
     - docker run sandipansahana/react-test npm run test -- --coverage
     
 after_success:
-    - docker build -t sandipansahana/mutli-client ./client
-    - docker build -t sandipansahana/mutli-nginx ./nginx
-    - docker build -t sandipansahana/mutli-server ./server
-    - docker build -t sandipansahana/mutli-worker ./worker
+    - docker build -t sandipansahana/multi-client ./client
+    - docker build -t sandipansahana/multi-nginx ./nginx
+    - docker build -t sandipansahana/multi-server ./server
+    - docker build -t sandipansahana/multi-worker ./worker
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    - docker push sandipansahana/mutli-client 
-    - docker push sandipansahana/mutli-nginx
-    - docker push sandipansahana/mutli-server 
-    - docker push sandipansahana/mutli-worker 
+    - docker push sandipansahana/multi-client 
+    - docker push sandipansahana/multi-nginx
+    - docker push sandipansahana/multi-server 
+    - docker push sandipansahana/multi-worker 
